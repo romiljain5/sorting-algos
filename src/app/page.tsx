@@ -80,7 +80,7 @@ export default function Home() {
         >
           Sorting Visualizer
         </h2>
-        <div className="flex space-x-4 relative">
+        <div className="flex flex-wrap space-x-4 relative">
           {/* Toggle random colors */}
           <label className="inline-flex items-center cursor-pointer">
             <input

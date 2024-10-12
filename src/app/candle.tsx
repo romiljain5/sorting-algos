@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 const Candle = ({ height, size, width, color, enableRandomColor }: any) => {
   return (
     <div
-      style={{
+    style={{
         height: `${height * 3.8}px`, // Scaling height for better visibility
-        width: `${width}px`,
-        margin: `0 ${width/4}px`,
+        width: window.innerWidth < 640 ? `${width}px` : `${width}px`, // Smaller width for mobile
+        margin: window.innerWidth < 640 ? `0 1px` : `0 ${width / 4}px`, // Smaller margin for mobile
         backgroundColor: enableRandomColor ? color : "#17BF68",
         display: "inline-block",
         transition: "all 0.3s ease",
@@ -263,7 +263,7 @@ const MergeSort = async (arr: string | any[], leftStart = 0) => {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: "20px" }} className="justify-center flex">
+      <div style={{ marginTop: "20px" }} className="justify-center flex flex-wrap">
         {/* Buttons to trigger swaps */}
         <button
           type="button"
