@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 // Candle component to represent each bar/candle
-const Candle = ({ height, size, width, color, enableRandomColor }: any) => {
+const Candle = ({ height, size, width, color, enableRandomColor, swappedIndices, index }: any) => {
+    const isSwapping = swappedIndices.includes(index); // Check if this bar is being swapped
+
+    console.log('Swapping', swappedIndices, index);
   return (
     <div
     style={{
         height: `${height * 3.8}px`, // Scaling height for better visibility
         width: window.innerWidth < 640 ? `${width}px` : `${width}px`, // Smaller width for mobile
         margin: window.innerWidth < 640 ? `0 1px` : `0 ${width / 4}px`, // Smaller margin for mobile
-        backgroundColor: enableRandomColor ? color : "#17BF68",
+        backgroundColor: isSwapping ? 'red' : enableRandomColor ? color : "#17BF68",
         display: "inline-block",
         transition: "all 0.3s ease",
       }}
@@ -27,6 +30,8 @@ const CandleChart = ({
 }: any) => {
   const [heights, setHeights] = useState(heightsArray);
   const [color, setColor] = useState(colorArray);
+  const [swappedIndices, setSwappedIndices] = useState<number[]>([]);
+
 
   // Use effect to update heights when heightsArray prop changes
   useEffect(() => {
@@ -212,11 +217,17 @@ const MergeSort = async (arr: string | any[], leftStart = 0) => {
     let newColors = [...color]; // Copy the array to avoid direct mutation
     // Swap logic
 
+    setSwappedIndices([i,j]);
     [arr[i], arr[j]] = [arr[j], arr[i]];
     [newHeights[i], newHeights[j]] = [newHeights[j], newHeights[i]];
     [newColors[i], newColors[j]] = [newColors[j], newColors[i]];
     setColor(newColors);
     setHeights(newHeights); // Update state with the swapped array
+
+    // Clear the swapped indices after some delay (e.g., 300ms)
+    setTimeout(() => {
+        setSwappedIndices([]);
+    }, 1000);
 
     console.log("Swapped heights:", newHeights);
   };
@@ -253,10 +264,12 @@ const MergeSort = async (arr: string | any[], leftStart = 0) => {
             <div>
               <Candle
                 key={index}
+                index={index}
                 height={height}
                 color={color[index]}
                 size={heightsArray.length}
                 width={candleWidth}
+                swappedIndices={swappedIndices}
                 enableRandomColor={enableRandomColor}
               />
             </div>
