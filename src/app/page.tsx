@@ -52,8 +52,8 @@ export default function Home() {
   };
 
   const RenderList = async (arrSize: number) => {
-    const list = await randomList(arrSize);
-    const randomColor = await randomLightColorList(arrSize)
+    const list: any = await randomList(arrSize);
+    const randomColor: any = await randomLightColorList(arrSize)
     setArray(list);
     setColorArray(randomColor);
   };

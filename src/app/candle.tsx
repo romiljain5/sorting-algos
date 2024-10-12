@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // Candle component to represent each bar/candle
-const Candle = ({ height, size, width, color, enableRandomColor }) => {
+const Candle = ({ height, size, width, color, enableRandomColor }: any) => {
   return (
     <div
       style={{
@@ -24,7 +24,7 @@ const CandleChart = ({
   triggerAction,
   setTriggerAction,
   speed,
-}) => {
+}: any) => {
   const [heights, setHeights] = useState(heightsArray);
   const [color, setColor] = useState(colorArray);
 
@@ -52,7 +52,7 @@ const CandleChart = ({
 
   //Merge Sort
 // Merge Sort
-const MergeSort = async (arr, leftStart = 0) => {
+const MergeSort = async (arr: string | any[], leftStart = 0) => {
     // Base case: arrays with 1 or 0 elements are already sorted
     if (arr.length <= 1) return arr;
   
@@ -61,15 +61,15 @@ const MergeSort = async (arr, leftStart = 0) => {
     const right = arr.slice(middle);    // Right half of the array
   
     // Recursively sort both halves and await the result
-    const sortedLeft = await MergeSort(left, leftStart); 
-    const sortedRight = await MergeSort(right, leftStart + middle);
+    const sortedLeft: any = await MergeSort(left, leftStart); 
+    const sortedRight: any = await MergeSort(right, leftStart + middle);
   
     // Merge both sorted halves back together and await the result
     return await Merge(sortedLeft, sortedRight, leftStart);
   };
   
   // Merge function to merge two sorted arrays
-  const Merge = async (left, right, start) => {
+  const Merge = async (left: string | any[], right: string | any[], start: number) => {
     let result = [];
     let leftIndex = 0;
     let rightIndex = 0;
@@ -107,7 +107,7 @@ const MergeSort = async (arr, leftStart = 0) => {
   };
 
   //Insertion Sort
-  const InsertionSort = async(arr) => {
+  const InsertionSort = async(arr: string | any) => {
     for (let j = 1; j < arr.length; j++) {
       // Temporary variable to hold the value of arr[j]
       let temp = arr[j];
@@ -127,7 +127,7 @@ const MergeSort = async (arr, leftStart = 0) => {
     return arr;
   };
 
-  const SelectionSort = async (arr) => {
+  const SelectionSort = async (arr: string | any) => {
     let i = 0;
     while (i < arr.length) {
       let min = i;
@@ -144,7 +144,7 @@ const MergeSort = async (arr, leftStart = 0) => {
   };
   
   // Swap and visualize the changes
-  const swapAndVisualize = async (i, j) => {
+  const swapAndVisualize = async (i: number, j: any | number) => {
     if (i === j) return;
   
     let newHeights = [...heights]; // Copy the array to avoid direct mutation
@@ -180,7 +180,7 @@ const MergeSort = async (arr, leftStart = 0) => {
   };
 
   // Partitioning function
-  const Partition = async (arr, low, high) => {
+  const Partition = async (arr: string | any, low: number, high: number) => {
     let pivot = arr[high];
     let i = low - 1;
 
@@ -203,7 +203,7 @@ const MergeSort = async (arr, leftStart = 0) => {
   };
 
   // Swap function to swap two indexes in the array
-  const swap = (arr, i, j) => {
+  const swap = (arr: { [x: string]: any; }, i: number, j: number) => {
     if (i < 0 || j < 0 || i >= heights.length || j >= heights.length) {
       console.error("Invalid index for swap");
       return;
@@ -247,8 +247,8 @@ const MergeSort = async (arr, leftStart = 0) => {
           border: "1px solid black",
         }}
       >
-        {heights.map((height, index) => (
-          <div>
+        {heights.map((height: any, index: any) => (
+          <div key={index}>
             <div className="justify-center flex text-sm">{height}</div>
             <div>
               <Candle

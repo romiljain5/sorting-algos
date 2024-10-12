@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serveprod": "npm run build && npx next start -p 4001"
   },
   "dependencies": {
     "@nivo/bar": "^0.80.0",

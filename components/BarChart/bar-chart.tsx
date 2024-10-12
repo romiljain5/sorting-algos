@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./bar-chart.css";
 
-export default function BarChart(props) {
+export default function BarChart(props: any) {
   const [numbers, setNumbers] = useState([]);
   const [maxNumber, setMaxNumber] = useState(10); // Initial maxNumber value
   const [colors, setColors] = useState([]);
@@ -26,7 +26,7 @@ export default function BarChart(props) {
     // Calculate the maximum number
     const max = Math.max(...numbers);
     // Calculate the color index for each number based on its value
-    const newColors = numbers.map(number => colorCodes[Math.floor((number / max) * colorCodes.length)]);
+    const newColors: any = numbers.map(number => colorCodes[Math.floor((number / max) * colorCodes.length)]);
     setColors(newColors);
   }, [numbers]); // Run this effect whenever numbers changes
 
