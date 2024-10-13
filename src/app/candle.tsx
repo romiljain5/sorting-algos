@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 
 // Candle component to represent each bar/candle
-const Candle = ({ height, size, width, color, enableRandomColor, swappedIndices, index }: any) => {
+const Candle = ({ height, size, width, color, enableRandomColor, swappedIndices, index, length }: any) => {
     const isSwapping = swappedIndices.includes(index); // Check if this bar is being swapped
 
+    const containerWidth = 200; // Fixed container width
+    const candleWidth = containerWidth / length;
     console.log('Swapping', swappedIndices, index);
   return (
     <div
     style={{
-        height: `${height * 3.8}px`, // Scaling height for better visibility
-        width: window.innerWidth < 640 ? `${width}px` : `${width}px`, // Smaller width for mobile
-        margin: window.innerWidth < 640 ? `0 1px` : `0 ${width / 4}px`, // Smaller margin for mobile
+        height: window.innerWidth < 640 ? `${height * 2.8}px` :`${height * 3.8}px`, // Scaling height for better visibility
+        width: window.innerWidth < 640 ? `${candleWidth}px` : `${width}px`, // Smaller width for mobile
+        margin: window.innerWidth < 640 ? `0 1px` : `0 1px`, // Smaller margin for mobile
         backgroundColor: isSwapping ? 'red' : enableRandomColor ? color : "#17BF68",
         display: "inline-block",
         transition: "all 0.3s ease",
@@ -254,13 +256,15 @@ const MergeSort = async (arr: string | any[], leftStart = 0) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-end",
-          height: "400px",
+          height: window.innerWidth < 640 ? "250px" : "400px",
           border: "1px solid black",
         }}
       >
         {heights.map((height: any, index: any) => (
           <div key={index}>
-            <div className="justify-center flex text-sm">{height}</div>
+            {heights.length <= 15 ? 
+            <div className="justify-center flex text-sm">{height}</div> : ''
+        }
             <div>
               <Candle
                 key={index}
@@ -271,6 +275,7 @@ const MergeSort = async (arr: string | any[], leftStart = 0) => {
                 width={candleWidth}
                 swappedIndices={swappedIndices}
                 enableRandomColor={enableRandomColor}
+                length={heights.length}
               />
             </div>
           </div>

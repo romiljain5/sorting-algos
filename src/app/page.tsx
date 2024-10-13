@@ -80,7 +80,7 @@ export default function Home() {
         >
           Sorting Visualizer
         </h2>
-        <div className="flex flex-wrap space-x-4 relative">
+        <div className="flex flex-wrap space-x-4 relative justify-center">
           {/* Toggle random colors */}
           <label className="inline-flex items-center cursor-pointer">
             <input
@@ -297,29 +297,35 @@ export default function Home() {
         </div>
       </div>
       <footer className="w-full mt-auto text-center py-6 bg-gray-800 text-white">
-        <div className="flex justify-center items-center">
+  <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+    
+    {/* Created with love */}
+    <p className="flex items-center text-sm">
+      Created with 
+      <img src={'bxs-heart.svg'} alt="Heart Icon" className="mx-2" width={30} height={30} /> by Romil | 
+    </p>
+    
+    {/* Social Media Links */}
+    <p className="text-sm">Follow me on:</p>
+    <div className="flex space-x-3">
+      <a
+        href="https://www.linkedin.com/in/romil-jain123/"
+        target="_blank"
+        className="text-white hover:underline"
+      >
+        <img src={'bxl-linkedin.svg'} alt="LinkedIn Icon" width={25} height={25} />
+      </a>
+      <a
+        href="https://github.com/romiljain5"
+        target="_blank"
+        className="text-white hover:underline"
+      >
+        <img src={'bxl-github.svg'} alt="GitHub Icon" width={25} height={25} />
+      </a>
+    </div>
+  </div>
+</footer>
 
-        <p className="flex justify-center items-center">
-          Created with 
-          <img src={'bxs-heart.svg'} alt="My Icon" className="mx-2" width={30} height={30} /> by Romil  | Follow me on
-        </p>
-          <a
-            href="https://www.linkedin.com/in/romil-jain123/"
-            target="_blank"
-            className="text-white hover:underline mx-3"
-          >
-            <i className="fa fa-linkedin-square" aria-hidden="true"></i>
-            <img src={'bxl-linkedin.svg'} alt="My Icon" width={25} height={25} />
-          </a>
-          <a
-            href="https://github.com/romiljain5"
-            target="_blank"
-            className="text-white hover:underline"
-          >
-            <img src={'bxl-github.svg'} alt="My Icon" width={25} height={25} />
-          </a></div>
-        
-      </footer>
     </div>
   );
 }
