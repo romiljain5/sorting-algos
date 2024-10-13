@@ -4,15 +4,14 @@ import React, { useState, useEffect } from "react";
 const Candle = ({ height, size, width, color, enableRandomColor, swappedIndices, index, length }: any) => {
     const isSwapping = swappedIndices.includes(index); // Check if this bar is being swapped
 
-    const containerWidth = 200; // Fixed container width
-    const candleWidth = containerWidth / length;
+    const candleWidth = width / length;
     console.log('Swapping', swappedIndices, index);
   return (
     <div
     style={{
-        height: window.innerWidth < 640 ? `${height * 2.8}px` :`${height * 3.8}px`, // Scaling height for better visibility
-        width: window.innerWidth < 640 ? `${candleWidth}px` : `${width}px`, // Smaller width for mobile
-        margin: window.innerWidth < 640 ? `0 1px` : `0 1px`, // Smaller margin for mobile
+        height: candleWidth < 640 ? `${height * 2.8}px` :`${height * 3.8}px`, // Scaling height for better visibility
+        width: candleWidth < 640 ? `${candleWidth}px` : `${width}px`, // Smaller width for mobile
+        margin: candleWidth < 640 ? `0 1px` : `0 1px`, // Smaller margin for mobile
         backgroundColor: isSwapping ? 'red' : enableRandomColor ? color : "#17BF68",
         display: "inline-block",
         transition: "all 0.3s ease",
@@ -33,6 +32,7 @@ const CandleChart = ({
   const [heights, setHeights] = useState(heightsArray);
   const [color, setColor] = useState(colorArray);
   const [swappedIndices, setSwappedIndices] = useState<number[]>([]);
+  const [windowWidth, setWindowWidth] = useState<number>(0); // Track window width
 
 
   // Use effect to update heights when heightsArray prop changes
@@ -54,7 +54,21 @@ const CandleChart = ({
     setTriggerAction("");
   }, [triggerAction]);
 
-  const containerWidth = 400; // Fixed container width
+    // Detect window width on the client side
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+          // Set window width
+          setWindowWidth(window.innerWidth);
+    
+          // Add resize listener to update window width when resized
+          const handleResize = () => setWindowWidth(window.innerWidth);
+          window.addEventListener("resize", handleResize);
+    
+          return () => window.removeEventListener("resize", handleResize);
+        }
+      }, []);
+
+  const containerWidth = windowWidth<640 ? 200 : 400; // Fixed container width
   const candleWidth = containerWidth / heights.length;
 
   //Merge Sort
@@ -256,7 +270,7 @@ const MergeSort = async (arr: string | any[], leftStart = 0) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-end",
-          height: window.innerWidth < 640 ? "250px" : "400px",
+          height: windowWidth < 640 ? "250px" : "400px",
           border: "1px solid black",
         }}
       >
